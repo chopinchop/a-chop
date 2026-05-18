@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jiaoyang | Timeline</title>
     <style>
-        /* --- 极简主义设计系统 --- */
         :root {
-            --bg-color: #FBFBFA;      /* 舒适的微米色背景 */
-            --text-main: #1D1D1F;     /* 艺术馆级别的深炭黑 */
-            --text-muted: #8E8E93;    /* 优雅的烟灰色 */
-            --border-color: #E5E5E5;  /* 极淡的分割线 */
+            --bg-color: #FBFBFA;      
+            --text-main: #1D1D1F;     
+            --text-muted: #8E8E93;    
+            --border-color: #E5E5E5;  
         }
 
         body {
@@ -26,11 +25,10 @@
 
         .container {
             width: 100%;
-            max-width: 580px; /* 克制的流式布局宽度，保持视觉聚焦 */
+            max-width: 580px; 
             padding: 60px 20px;
         }
 
-        /* --- 个人信息区域 (只在这里展示一次身份) --- */
         .profile-header {
             display: flex;
             align-items: center;
@@ -43,7 +41,7 @@
             border-radius: 50%;
             object-fit: cover;
             margin-right: 20px;
-            filter: grayscale(10%); /* 微微去饱和，增加高级感 */
+            background-color: #E5E5E5; /* 占位色块，防止网络卡头像 */
         }
 
         .user-name {
@@ -61,7 +59,6 @@
             letter-spacing: 0.2px;
         }
 
-        /* --- 独立区域导航（主页 / 图片 分区） --- */
         .nav-tabs {
             display: flex;
             gap: 30px;
@@ -88,18 +85,16 @@
             font-weight: 500;
         }
 
-        /* --- 纯粹的信息流：绝不重复出现用户名 --- */
         .timeline {
             display: flex;
             flex-direction: column;
-            gap: 45px; /* 空灵的留白 */
+            gap: 45px; 
         }
 
         .post-card {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            transition: opacity 0.3s ease;
         }
 
         .post-content {
@@ -109,24 +104,20 @@
             white-space: pre-wrap;
         }
 
-        /* 图片作为独立的视觉区块 */
         .post-image-wrapper {
             width: 100%;
             border-radius: 4px;
             overflow: hidden;
             margin-top: 4px;
-            background-color: #F2F2F2;
+            background-color: #E5E5E5;
+            aspect-ratio: 16 / 9; /* 用纯色高级灰块代替网络图片测试 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8E8E93;
+            font-size: 13px;
         }
 
-        .post-image {
-            width: 100%;
-            height: auto;
-            max-height: 450px;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* 微博质感的轻量化时间戳 */
         .post-time {
             font-size: 12px;
             color: var(--text-muted);
@@ -134,7 +125,6 @@
             margin-top: 2px;
         }
 
-        /* --- 相册网格视图 (点击“图片”区时激活) --- */
         .timeline.grid-mode {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -147,16 +137,12 @@
 
         .timeline.grid-mode .post-content, 
         .timeline.grid-mode .post-time {
-            display: none; /* 纯相册模式下隐藏文字和时间 */
+            display: none; 
         }
 
         .timeline.grid-mode .post-image-wrapper {
             margin-top: 0;
-            aspect-ratio: 1 / 1; /* 完美的正方形画廊网格 */
-        }
-        
-        .timeline.grid-mode .post-image {
-            height: 100%;
+            aspect-ratio: 1 / 1; 
         }
     </style>
 </head>
@@ -164,4 +150,58 @@
 
     <div class="container">
         <header class="profile-header">
-            <img class="avatar" src="
+            <div class="avatar"></div>
+            <div>
+                <h1 class="user-name">Jiaoyang</h1>
+                <p class="bio">电影摄影 / 视觉知觉。在秩序中寻找某种特定的消逝。</p>
+            </div>
+        </header>
+
+        <nav class="nav-tabs">
+            <span class="tab-item active" id="tab-all" onclick="switchTab('all')">主页</span>
+            <span class="tab-item" id="tab-photos" onclick="switchTab('photos')">图片</span>
+        </nav>
+
+        <main class="timeline" id="timeline">
+            
+            <article class="post-card" data-has-image="true">
+                <div class="post-content">傍晚的光线在墙上停留了大概十一分钟。那种颗粒感和衰减的方式，很像某种特定时期的反转片。不需要过多的修饰，光线本身就是修辞。</div>
+                <div class="post-image-wrapper">
+                    <span>[ 视觉占位区块 ]</span>
+                </div>
+                <div class="post-time">5月18日 17:20</div>
+            </article>
+
+            <article class="post-card" data-has-image="false">
+                <div class="post-content">声音的密度比视觉更不容易说谎。最近在反复听一些环境音的采样，试图捕捉那种‘空间本身的沉默’。极简不是缺少内容，而是克制住不必要的杂音。</div>
+                <div class="post-time">5月16日 10:14</div>
+            </article>
+
+        </main>
+    </div>
+
+    <script>
+        function switchTab(mode) {
+            const timeline = document.getElementById('timeline');
+            const cards = document.querySelectorAll('.post-card');
+            
+            document.getElementById('tab-all').classList.toggle('active', mode === 'all');
+            document.getElementById('tab-photos').classList.toggle('active', mode === 'photos');
+
+            if (mode === 'all') {
+                timeline.classList.remove('grid-mode');
+                cards.forEach(card => card.style.display = 'flex');
+            } else if (mode === 'photos') {
+                timeline.classList.add('grid-mode');
+                cards.forEach(card => {
+                    if (card.getAttribute('data-has-image') === 'true') {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
