@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jiaoyang | Timeline</title>
+    <title>username | Timeline</title>
     <style>
+        /* --- 极简主义设计系统 --- */
         :root {
-            --bg-color: #FBFBFA;      
-            --text-main: #1D1D1F;     
-            --text-muted: #8E8E93;    
-            --border-color: #E5E5E5;  
+            --bg-color: #FBFBFA;      /* 舒适的微米色背景 */
+            --text-main: #1D1D1F;     /* 艺术馆级别的深炭黑 */
+            --text-muted: #8E8E93;    /* 优雅的烟灰色 */
+            --border-color: #E5E5E5;  /* 极淡的分割线 */
         }
 
         body {
@@ -29,36 +30,21 @@
             padding: 60px 20px;
         }
 
+        /* --- 个人信息区域 --- */
         .profile-header {
             display: flex;
             align-items: center;
             margin-bottom: 40px;
         }
 
-        .avatar {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 20px;
-            background-color: #E5E5E5; /* 占位色块，防止网络卡头像 */
-        }
-
         .user-name {
             font-size: 20px;
             font-weight: 500;
             letter-spacing: 0.8px;
-            margin: 0 0 6px 0;
-        }
-
-        .bio {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.5;
             margin: 0;
-            letter-spacing: 0.2px;
         }
 
+        /* --- 独立区域导航 --- */
         .nav-tabs {
             display: flex;
             gap: 30px;
@@ -85,6 +71,7 @@
             font-weight: 500;
         }
 
+        /* --- 纯粹的信息流 --- */
         .timeline {
             display: flex;
             flex-direction: column;
@@ -99,32 +86,37 @@
 
         .post-content {
             font-size: 14.5px;
-            line-height: 1.65;
-            letter-spacing: 0.5px;
+            line-height: 1.7;
+            letter-spacing: 0.6px;
             white-space: pre-wrap;
         }
 
+        /* 图片独立视觉区块 */
         .post-image-wrapper {
             width: 100%;
             border-radius: 4px;
             overflow: hidden;
             margin-top: 4px;
-            background-color: #E5E5E5;
-            aspect-ratio: 16 / 9; /* 用纯色高级灰块代替网络图片测试 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #8E8E93;
-            font-size: 13px;
         }
 
+        .post-image {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 微博质感的时间戳 */
         .post-time {
             font-size: 12px;
             color: var(--text-muted);
             font-variant-numeric: tabular-nums;
             margin-top: 2px;
+            letter-spacing: 0.3px;
         }
 
+        /* 相册网格视图 */
         .timeline.grid-mode {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -144,17 +136,17 @@
             margin-top: 0;
             aspect-ratio: 1 / 1; 
         }
+        
+        .timeline.grid-mode .post-image {
+            height: 100%;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <header class="profile-header">
-            <div class="avatar"></div>
-            <div>
-                <h1 class="user-name">Jiaoyang</h1>
-                <p class="bio">电影摄影 / 视觉知觉。在秩序中寻找某种特定的消逝。</p>
-            </div>
+            <h1 class="user-name">username</h1>
         </header>
 
         <nav class="nav-tabs">
@@ -163,18 +155,23 @@
         </nav>
 
         <main class="timeline" id="timeline">
-            
-            <article class="post-card" data-has-image="true">
-                <div class="post-content">傍晚的光线在墙上停留了大概十一分钟。那种颗粒感和衰减的方式，很像某种特定时期的反转片。不需要过多的修饰，光线本身就是修辞。</div>
-                <div class="post-image-wrapper">
-                    <span>[ 视觉占位区块 ]</span>
-                </div>
-                <div class="post-time">5月18日 17:20</div>
-            </article>
 
             <article class="post-card" data-has-image="false">
-                <div class="post-content">声音的密度比视觉更不容易说谎。最近在反复听一些环境音的采样，试图捕捉那种‘空间本身的沉默’。极简不是缺少内容，而是克制住不必要的杂音。</div>
-                <div class="post-time">5月16日 10:14</div>
+                <div class="post-content">你好，今天是我第一次纪录，我今天要做三件事情：
+1. 做这个网页
+2. 了解上一个丙午年的世界
+3. 咨询八字课程的事情
+
+今天喝了一杯巴拿马瑰夏，有木槿花和玉兰花的味道。长沙，5月，你们要在白天坐车，就可以看到这个白玉兰的季节。</div>
+                <div class="post-time">5月18日 🌑 18:18</div>
+            </article>
+
+            <article class="post-card" data-has-image="true">
+                <div class="post-content">在低饱和度的色彩系统里，物体的质感会被放大。这也是为什么有些材质只能在阴天或者微弱的漫反射光线下才能展现出它的呼吸感。</div>
+                <div class="post-image-wrapper">
+                    <img class="post-image" src="https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?w=1000" alt="Post Image">
+                </div>
+                <div class="post-time">5月12日 🌒 23:43</div>
             </article>
 
         </main>
